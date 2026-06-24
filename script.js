@@ -1,0 +1,170 @@
+// Chimes Crane Hire — Mockup v6 shared behaviour
+
+// Header scroll state
+const hdr = document.getElementById('hdr');
+if (hdr) window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', scrollY > 20));
+
+// Mobile nav toggle
+const hbg = document.getElementById('hbg');
+if (hbg) hbg.addEventListener('click', () => document.getElementById('nav').classList.toggle('open'));
+
+// Fade-up on scroll
+const fus = document.querySelectorAll('.fu');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+fus.forEach(el => io.observe(el));
+
+// Count-up for stats
+function countUp(el, target, suffix) {
+  let v = 0;
+  const step = target / 60;
+  const t = setInterval(() => {
+    v = Math.min(v + step, target);
+    el.textContent = Math.floor(v) + suffix;
+    if (v >= target) clearInterval(t);
+  }, 22);
+}
+const sio = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const t = parseInt(e.target.dataset.to);
+      const suffix = e.target.dataset.suffix !== undefined ? e.target.dataset.suffix : '+';
+      if (t) countUp(e.target, t, suffix);
+      sio.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.stat-n[data-to]').forEach(el => sio.observe(el));
+
+// Industries clickable list + preview panel
+function setIndustry(key) {
+  document.querySelectorAll('.ind-li').forEach(el => el.classList.toggle('active', el.dataset.ind === key));
+  document.querySelectorAll('.ind-panel-ico').forEach(el => el.classList.toggle('active', el.dataset.ind === key));
+  document.querySelectorAll('.ind-panel-txt').forEach(el => el.classList.toggle('active', el.dataset.ind === key));
+}
+document.querySelectorAll('.ind-li').forEach(li => {
+  li.addEventListener('click', () => setIndustry(li.dataset.ind));
+  li.addEventListener('mouseenter', () => setIndustry(li.dataset.ind));
+});
+
+// Testimonial carousel
+const testiSlides = document.querySelectorAll('.testi-slide');
+const testiCount = document.getElementById('testiCount');
+let testiIdx = 0;
+function showTesti(i) {
+  testiIdx = (i + testiSlides.length) % testiSlides.length;
+  testiSlides.forEach((s, idx) => s.classList.toggle('active', idx === testiIdx));
+  if (testiCount) testiCount.textContent = String(testiIdx + 1).padStart(2, '0') + ' / ' + String(testiSlides.length).padStart(2, '0');
+}
+document.getElementById('testiNext')?.addEventListener('click', () => showTesti(testiIdx + 1));
+document.getElementById('testiPrev')?.addEventListener('click', () => showTesti(testiIdx - 1));
+
+// Fleet spec modal
+function openModal(id) {
+  const modal = document.getElementById(id);
+  if (modal) { modal.classList.add('open'); document.body.style.overflow = 'hidden'; }
+}
+function closeModal(id) {
+  const modal = document.getElementById(id);
+  if (modal) { modal.classList.remove('open'); document.body.style.overflow = ''; }
+}
+document.querySelectorAll('.modal-backdrop').forEach(m => {
+  m.addEventListener('click', (e) => { if (e.target === m) closeModal(m.id); });
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') document.querySelectorAll('.modal-backdrop.open').forEach(m => closeModal(m.id));
+});
+
+// Quote form demo submit
+function handleForm(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.btn-sub');
+  if (!btn) return;
+  const original = btn.textContent;
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = 'Request Sent!';
+    e.target.reset();
+    setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 3000);
+  }, 1200);
+}
+
+// Newsletter signup demo
+function handleSignup(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button');
+  const original = btn.textContent;
+  btn.textContent = 'Subscribed!';
+  e.target.reset();
+  setTimeout(() => { btn.textContent = original; }, 2500);
+}
+
+// Galleries page: tabs
+function switchGalTab(key) {
+  document.querySelectorAll('.gal-tab-btn').forEach(el => el.classList.toggle('active', el.dataset.tab === key));
+  document.querySelectorAll('.gal-panel').forEach(el => el.classList.toggle('active', el.id === 'panel-' + key));
+}
+document.querySelectorAll('.gal-tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => switchGalTab(btn.dataset.tab));
+});
+
+// Galleries page: lightbox
+const lightbox = document.getElementById('lightbox');
+if (lightbox) {
+  const lbImg = document.getElementById('lbImg');
+  const lbCount = document.getElementById('lbCount');
+  let lbList = [];
+  let lbIdx = 0;
+  function showLb(i) {
+    lbIdx = (i + lbList.length) % lbList.length;
+    lbImg.src = lbList[lbIdx].src;
+    lbImg.alt = lbList[lbIdx].alt;
+    lbCount.textContent = String(lbIdx + 1).padStart(2, '0') + ' / ' + String(lbList.length).padStart(2, '0');
+  }
+  function openLb(panel, index) {
+    lbList = [...panel.querySelectorAll('img')];
+    showLb(index);
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLb() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
+  document.querySelectorAll('.gal-panel').forEach(panel => {
+    panel.querySelectorAll('figure').forEach((fig, i) => fig.addEventListener('click', () => openLb(panel, i)));
+  });
+  document.getElementById('lbClose')?.addEventListener('click', closeLb);
+  document.getElementById('lbPrev')?.addEventListener('click', () => showLb(lbIdx - 1));
+  document.getElementById('lbNext')?.addEventListener('click', () => showLb(lbIdx + 1));
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLb(); });
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowLeft') showLb(lbIdx - 1);
+    if (e.key === 'ArrowRight') showLb(lbIdx + 1);
+  });
+}
+
+// Cookie banner
+const COOKIE_KEY = 'chimes_cookie_consent';
+const cookieBanner = document.getElementById('cookieBanner');
+if (cookieBanner && !localStorage.getItem(COOKIE_KEY)) {
+  requestAnimationFrame(() => requestAnimationFrame(() => cookieBanner.classList.add('show')));
+}
+document.getElementById('cbAccept')?.addEventListener('click', () => { localStorage.setItem(COOKIE_KEY, 'accepted'); cookieBanner.classList.remove('show'); });
+document.getElementById('cbDecline')?.addEventListener('click', () => { localStorage.setItem(COOKIE_KEY, 'declined'); cookieBanner.classList.remove('show'); });
+
+// Glass ripple on buttons
+document.querySelectorAll('.btn-out,.btn-fill,.btn-grn,.btn-hero,.btn-wht,.btn-sub').forEach(btn => {
+  btn.addEventListener('click', function (e) {
+    const r = document.createElement('span');
+    r.className = 'ripple';
+    const rect = this.getBoundingClientRect();
+    r.style.left = (e.clientX - rect.left) + 'px';
+    r.style.top = (e.clientY - rect.top) + 'px';
+    this.appendChild(r);
+    setTimeout(() => r.remove(), 650);
+  });
+});
