@@ -187,17 +187,7 @@ img{max-width:100%; display:block;}
 .cap-img-card:hover .cap-arrow,.cap-card:hover .cap-arrow{transform:translateX(4px);}
 
 /* ===== INDUSTRIES ===== */
-.ind-split{display:grid; grid-template-columns:.85fr 1.15fr; gap:0; border-radius:var(--radius-card); overflow:hidden;}
-.ind-list{border-right:1px solid var(--glass-border);}
-.ind-li{font-family:var(--ff-head); font-weight:800; font-size:17px; text-transform:uppercase; padding:22px 26px; border-bottom:1px solid var(--glass-border); cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition:background .15s, color .15s;}
-.ind-li.active,.ind-li:hover{background:rgba(255,255,255,.06); color:var(--green);}
-.ind-li .ind-arrow{opacity:0; color:var(--green); transition:opacity .15s, transform .15s; transform:translateX(-6px);}
-.ind-li.active .ind-arrow{opacity:1; transform:translateX(0);}
-.ind-panel{padding:40px; position:relative;}
-.ind-panel-ico{display:none; color:var(--green); width:56px; height:56px; margin-bottom:24px; filter:drop-shadow(0 0 12px var(--green-glow));}
-.ind-panel-ico.active{display:block;}
-.ind-panel-txt{display:none; font-size:16px; color:var(--text);}
-.ind-panel-txt.active{display:block;}
+.ind-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
 
 /* ===== FLEET TEASER + FLEET PAGE CARDS ===== */
 .fleet-card-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
@@ -348,7 +338,8 @@ footer{background:var(--bg2); border-top:1px solid var(--glass-border); padding:
 
 /* ===== RESPONSIVE ===== */
 @media (max-width:900px){
-  .about-split,.ind-split,.quote-grid{grid-template-columns:1fr;}
+  .about-split,.quote-grid{grid-template-columns:1fr;}
+  .ind-grid{grid-template-columns:repeat(2,1fr);}
   .cap-grid{grid-template-columns:repeat(2,1fr);}
   .cap-feature{grid-row:span 1;}
   .fleet-card-grid,.fleet-card-grid.sm,.quick-grid,.team-grid,.tlr-grid{grid-template-columns:repeat(2,1fr);}
@@ -364,7 +355,7 @@ footer{background:var(--bg2); border-top:1px solid var(--glass-border); padding:
     background:linear-gradient(160deg, var(--glass-hi), var(--glass)); backdrop-filter:blur(22px) saturate(160%); border:1px solid var(--glass-border); border-radius:var(--radius-card);}
   .nav-links.open{display:flex;}
   .nav-ctas{display:none;}
-  .stat-grid,.cap-grid,.fleet-card-grid,.fleet-card-grid.sm,.quick-grid,.team-grid,.tlr-grid,.gallery-grid{grid-template-columns:1fr;}
+  .stat-grid,.cap-grid,.ind-grid,.fleet-card-grid,.fleet-card-grid.sm,.quick-grid,.team-grid,.tlr-grid,.gallery-grid{grid-template-columns:1fr;}
   .gallery-grid figure.wide{grid-column:span 1;}
   .ft-top{grid-template-columns:1fr;}
   .signup-band{flex-direction:column; align-items:stretch; gap:16px;}

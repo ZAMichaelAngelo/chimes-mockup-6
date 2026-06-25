@@ -39,17 +39,6 @@ const sio = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 document.querySelectorAll('.stat-n[data-to]').forEach(el => sio.observe(el));
 
-// Industries clickable list + preview panel
-function setIndustry(key) {
-  document.querySelectorAll('.ind-li').forEach(el => el.classList.toggle('active', el.dataset.ind === key));
-  document.querySelectorAll('.ind-panel-ico').forEach(el => el.classList.toggle('active', el.dataset.ind === key));
-  document.querySelectorAll('.ind-panel-txt').forEach(el => el.classList.toggle('active', el.dataset.ind === key));
-}
-document.querySelectorAll('.ind-li').forEach(li => {
-  li.addEventListener('click', () => setIndustry(li.dataset.ind));
-  li.addEventListener('mouseenter', () => setIndustry(li.dataset.ind));
-});
-
 // Testimonial carousel
 const testiSlides = document.querySelectorAll('.testi-slide');
 const testiCount = document.getElementById('testiCount');
