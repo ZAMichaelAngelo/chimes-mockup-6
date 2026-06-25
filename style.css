@@ -271,13 +271,16 @@ footer{background:var(--bg2); border-top:1px solid var(--glass-border); padding:
 .ft-top{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; margin-bottom:50px;}
 .ft-brand img{height:30px; margin-bottom:16px;}
 .ft-brand p{font-size:13.5px; color:var(--muted); max-width:320px;}
-.ft-social{display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:50%; background:var(--glass); border:1px solid var(--glass-border); color:var(--white); margin-top:16px;}
+.ft-social{display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:50%; background:var(--glass); border:1px solid var(--glass-border); color:var(--white); transition:border-color .2s, color .2s;}
+.ft-social:hover{border-color:var(--green); color:var(--green);}
+.ft-social-row{display:flex; gap:10px; margin-top:16px;}
 .ft-col h5{font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--white); margin-bottom:16px;}
 .ft-col ul{list-style:none;}
 .ft-col li{margin-bottom:10px;}
 .ft-col a{font-size:14px; color:var(--muted);}
 .ft-col a:hover{color:var(--green);}
 .bee-ft{margin-top:14px;}
+.badge-chip{padding:8px 14px; border:1px solid var(--glass-border); border-radius:var(--radius-pill); background:var(--glass);}
 .ft-bot{display:flex; justify-content:space-between; align-items:center; padding-top:26px; border-top:1px solid var(--glass-border); font-size:13px; color:var(--muted); flex-wrap:wrap; gap:10px;}
 .ft-bot-link{color:var(--muted);}
 .ft-tag{font-family:var(--ff-head); font-weight:700; letter-spacing:.04em;}
