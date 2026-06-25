@@ -202,6 +202,8 @@ img{max-width:100%; display:block;}
 .fc-tag{position:absolute; left:0; right:0; bottom:0; z-index:1; background:rgba(112,191,68,.92); backdrop-filter:blur(8px); color:var(--bg); padding:14px 18px;}
 .fc-class{font-family:var(--ff-head); font-weight:800; font-size:13px;}
 .fc-name{font-size:13px; margin-top:2px;}
+.fc-arrow{display:inline-block; margin-top:6px; font-size:16px; font-weight:800; color:var(--bg); transition:transform .2s;}
+.fc:hover .fc-arrow{transform:translateX(4px);}
 
 /* ===== TESTIMONIALS ===== */
 .testi-card{display:none; padding:36px; max-width:760px;}
