@@ -7,12 +7,12 @@
 :root{
   --bg:#0A0A0C;
   --bg2:#111418;
-  --green:#70BF44;
+  --green:#78B838;
   --green-soft:#9AD673;
-  --green-glow:rgba(112,191,68,.45);
-  --navy:#1A427F;
+  --green-glow:rgba(120,184,56,.45);
+  --navy:#083868;
   --navy-soft:#3868B0;
-  --navy-glow:rgba(26,66,127,.5);
+  --navy-glow:rgba(8,56,104,.5);
   --amber:#E8A93C;
   --white:#FFFFFF;
   --text:rgba(255,255,255,.86);
