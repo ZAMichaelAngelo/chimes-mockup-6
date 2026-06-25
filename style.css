@@ -165,21 +165,26 @@ img{max-width:100%; display:block;}
 .cap-hd{margin-bottom:44px;}
 .cap-hd h2{font-size:clamp(28px,3.6vw,44px);}
 .cap-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
-.cap-feature{
-  grid-row:span 2; min-height:360px; background-size:cover; background-position:center;
-  border-radius:var(--radius-card); position:relative; display:flex; flex-direction:column; justify-content:flex-end; padding:28px;
-  border:1px solid var(--glass-border); overflow:hidden;
+.cap-feature,.cap-img-card{
+  background-size:cover; background-position:center; position:relative;
+  border-radius:var(--radius-card); display:flex; flex-direction:column; justify-content:flex-end; padding:28px;
+  border:1px solid var(--glass-border); overflow:hidden; transition:transform .3s;
 }
-.cap-feature::before{content:''; position:absolute; inset:0; background:linear-gradient(180deg, transparent 30%, rgba(10,10,12,.92) 100%);}
-.cap-feature .cap-no,.cap-feature .cap-txt{position:relative; z-index:1;}
+.cap-feature{grid-row:span 2; min-height:360px;}
+.cap-img-card{min-height:280px;}
+.cap-img-card:hover{transform:translateY(-4px);}
+.cap-feature::before,.cap-img-card::before{content:''; position:absolute; inset:0; background:linear-gradient(180deg, transparent 30%, rgba(10,10,12,.92) 100%);}
+.cap-feature .cap-no,.cap-feature .cap-txt,.cap-img-card .cap-no,.cap-img-card .cap-txt{position:relative; z-index:1;}
 .cap-card{
   background:linear-gradient(160deg, var(--glass-hi), var(--glass)); backdrop-filter:blur(22px) saturate(160%);
   border:1px solid var(--glass-border); border-radius:var(--radius-card); padding:28px; display:flex; flex-direction:column; gap:10px;
   transition:transform .3s, border-color .3s;
 }
 .cap-card:hover{transform:translateY(-4px); border-color:var(--green);}
+.cap-card-ico{width:40px; height:40px; color:var(--green); filter:drop-shadow(0 0 10px var(--green-glow));}
 .cap-no{font-family:var(--ff-head); font-weight:800; color:var(--green); font-size:13px;}
-.cap-arrow{color:var(--green); font-size:18px;}
+.cap-arrow{display:inline-block; margin-top:4px; color:var(--green); font-size:18px; transition:transform .2s;}
+.cap-img-card:hover .cap-arrow,.cap-card:hover .cap-arrow{transform:translateX(4px);}
 
 /* ===== INDUSTRIES ===== */
 .ind-split{display:grid; grid-template-columns:.85fr 1.15fr; gap:0; border-radius:var(--radius-card); overflow:hidden;}
