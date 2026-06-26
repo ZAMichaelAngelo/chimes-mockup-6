@@ -87,7 +87,7 @@ img{max-width:100%; display:block;}
   padding:10px 10px 10px 24px; transition:box-shadow .3s;
 }
 #hdr.scrolled .nav-wrap{box-shadow:inset 0 1px 0 rgba(255,255,255,.22), 0 24px 70px rgba(0,0,0,.6);}
-.logo-link img{height:56px;}
+.logo-link img{height:56px; filter:drop-shadow(0 0 8px rgba(120,184,56,.7)) drop-shadow(0 0 22px rgba(120,184,56,.35));}
 .nav-links{display:flex; align-items:center; gap:6px;}
 .nav-links a{
   font-family:var(--ff-head); font-size:13px; font-weight:700; letter-spacing:.02em;
